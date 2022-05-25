@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Story</string>
+    <string name="name">Nama User</string>
+    <string name="add_story_label">Add Story</string>
+    <string name="dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non arcu purus. Quisque ipsum mi, tincidunt vitae pharetra commodo, venenatis ut lorem. Curabitur feugiat at est et rhoncus. Aliquam ut lacinia nibh, at ornare lorem. Etiam egestas magna nisi, et bibendum quam ornare ut. Suspendisse potenti. Sed viverra mauris nulla, sed rhoncus dolor semper id. Nulla ut tellus feugiat, interdum felis sed, molestie velit.</string>
+    <string name="tidak_memiliki_akun">Tidak memiliki akun?</string>
+    <string name="daftar_disini">Daftar disini</string>
+    <string name="masuk_dengan_akun_tamu">Masuk dengan akun tamu</string>
+    <string name="hint_email">Masukkan Email</string>
+    <string name="hint_pass">Masukkan Password</string>
+    <string name="copyright">© 2022 Zakariya</string>
+    <string name="sing_up">Sing Up</string>
+    <string name="login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="sudah_memiliki_akun">Sudah memiliki akun?</string>
+    <string name="masuk_disini">Masuk disini</string>
+    <string name="imageView">Image View</string>
+    <string name="deskripsi">deskripsi</string>
+    <string name="preview_image">Preview Image</string>
+    <string name="camera_x">Camera X</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="logout">Logout</string>
+    <string name="CaptureImage">Capture Image</string>
+    <string name="switchCamera">Switch Camera</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding Story!</string>
+    <string name="message_welcome_page">Bagikan pengalaman menarik anda dalam belajar di Dicoding!</string>
+
+
+</resources>
