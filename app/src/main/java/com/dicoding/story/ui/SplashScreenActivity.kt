@@ -1,13 +1,14 @@
 package com.dicoding.story.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.story.R
-import com.dicoding.story.preference.Preference
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
     private val SPLASH_TIME_OUT: Long = 1500
 

@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.material.textfield.TextInputEditText
 
 class PassText : TextInputEditText, View.OnTouchListener {
@@ -42,7 +41,7 @@ class PassText : TextInputEditText, View.OnTouchListener {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().length < 6 ){
+                if (s.toString().length < 6) {
                     error = "Password kurang dari 6 karakter"
                 }
             }

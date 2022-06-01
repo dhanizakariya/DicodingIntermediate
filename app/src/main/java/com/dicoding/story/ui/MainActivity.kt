@@ -1,5 +1,6 @@
 package com.dicoding.story.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.story.R
 import com.dicoding.story.adapter.StoryAdapter
-import com.dicoding.story.data.StoryDetailData
+import com.dicoding.story.data.ListStoryItem
 import com.dicoding.story.databinding.ActivityMainBinding
 import com.dicoding.story.preference.Preference
 import com.dicoding.story.viewModel.MainViewModel
@@ -20,17 +21,30 @@ class MainActivity : AppCompatActivity() {
     private lateinit var preference: Preference
     private lateinit var adapter: StoryAdapter
     private val mainViewModel: MainViewModel by viewModels()
+    private var list = ArrayList<ListStoryItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initAction()
+        startViewModel()
+        recycleViewConfig()
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initAction() {
         preference = Preference(this)
 
-        adapter = StoryAdapter()
+        adapter = StoryAdapter(list)
+        adapter.notifyDataSetChanged()
+
+        val actionbar = supportActionBar
+        actionbar!!.hide()
 
         adapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: StoryDetailData) {
+            override fun onItemClicked(data: ListStoryItem) {
                 Intent(this@MainActivity, StoryDetailActivity::class.java).also {
                     it.putExtra(StoryDetailActivity.EXTRA_NAME, data.name)
                     it.putExtra(StoryDetailActivity.EXTRA_DESCRIPTION, data.description)
@@ -39,18 +53,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
-        recycleViewConfig()
-        startViewModel()
     }
 
     private fun startViewModel() {
         mainViewModel.getStory().observe(this) {
             if (it != null) {
-                adapter.setList(it.listStory)
+                adapter.setList(it)
             }
         }
-
     }
 
     private fun recycleViewConfig() {

@@ -1,5 +1,7 @@
 package com.dicoding.story.data
 
+import androidx.room.TypeConverter
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 data class GetStoryResponse(
@@ -8,19 +10,24 @@ data class GetStoryResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("listStory")
-    val listStory: ListStoryItem
+    val listStory: ArrayList<ListStoryItem>
 )
 
 data class ListStoryItem(
+    @SerializedName("id")
+    val id: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("description")
     val description: String,
     @SerializedName("photoUrl")
     val photoUrl: String,
-    @SerializedName("lat")
-    val lat: Double,
+    @SerializedName("CreatedAt")
+    val createdAt: String,
     @SerializedName("lon")
     val lon: Double,
+    @SerializedName("lat")
+    val lat: Double
 )
+
 

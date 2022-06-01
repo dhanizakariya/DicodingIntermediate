@@ -1,6 +1,8 @@
 package com.dicoding.story.api
 
-import com.dicoding.story.data.*
+import com.dicoding.story.data.DefaultResponse
+import com.dicoding.story.data.GetStoryResponse
+import com.dicoding.story.data.LoginResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -25,8 +27,11 @@ interface ApiServices {
 
     @GET("stories")
     fun getStories(
-        @Header("Authorization") authToken: String
-    ): Call<StoryResponse>
+        @Header("Authorization") authToken: String,
+        @Query("location") location: Int,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Call<GetStoryResponse>
 
     @Multipart
     @POST("stories")

@@ -2,7 +2,6 @@ package com.dicoding.story.customView
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -10,7 +9,6 @@ import android.util.AttributeSet
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
-import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.material.textfield.TextInputEditText
 
 class MailText : TextInputEditText, View.OnTouchListener {

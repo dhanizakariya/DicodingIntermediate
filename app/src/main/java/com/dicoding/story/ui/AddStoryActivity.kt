@@ -17,7 +17,6 @@ import androidx.core.content.FileProvider
 import com.dicoding.story.api.ApiClient
 import com.dicoding.story.createTempFile
 import com.dicoding.story.data.DefaultResponse
-import com.dicoding.story.data.StoryResponse
 import com.dicoding.story.databinding.ActivityAddStoryBinding
 import com.dicoding.story.preference.Preference
 import com.dicoding.story.preference.Preference.Companion.PREF_TOKEN
@@ -44,8 +43,6 @@ class AddStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(

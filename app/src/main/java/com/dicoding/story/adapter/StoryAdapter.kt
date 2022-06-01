@@ -1,54 +1,59 @@
 package com.dicoding.story.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dicoding.story.data.StoryDetailData
-import com.dicoding.story.data.StoryResponse
+import com.dicoding.story.GlideApp
+import com.dicoding.story.data.ListStoryItem
 import com.dicoding.story.databinding.StoryItemBinding
 
-class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
-    private val data = ArrayList<StoryDetailData>()
+class StoryAdapter(private val list: ArrayList<ListStoryItem>) :
+    RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+    private val data = ArrayList<ListStoryItem>()
     private var onItemClickCallback: OnItemClickCallback? = null
+
+    inner class StoryViewHolder(private val _binding: StoryItemBinding) :
+        RecyclerView.ViewHolder(_binding.root) {
+        fun bind(story: ListStoryItem) {
+            _binding.root.setOnClickListener {
+                onItemClickCallback?.onItemClicked(story)
+            }
+            _binding.apply {
+                GlideApp.with(itemView)
+                    .load(story.photoUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .centerCrop()
+                    .into(imgStory)
+                tvName.text = story.name
+                tvDescription.text = story.description
+            }
+        }
+    }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: StoryDetailData)
+        fun onItemClicked(data: ListStoryItem)
     }
 
 
-    inner class StoryViewHolder(private val _binding: StoryItemBinding) :
-        RecyclerView.ViewHolder(_binding.root){
-            fun bind(story: StoryDetailData){
-                _binding.apply {
-                    Glide.with(itemView)
-                        .load(story.photoUrl)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .centerCrop()
-                        .into(imgStory)
-                    tvName.text = story.name
-                    tvDescription.text = story.description
-
-                    Log.e("img_Url",imgStory.toString())
-                    Log.e("tv_name",tvName.toString())
-                }
-            }
-        }
-
-    fun setList(story: StoryDetailData) {
+    fun setList(story: ArrayList<ListStoryItem>) {
         data.clear()
-        data.addAll(listOf(story))
+        data.addAll(story)
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
-        val binding = StoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoryViewHolder(binding)
+        return StoryViewHolder(
+            StoryItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {

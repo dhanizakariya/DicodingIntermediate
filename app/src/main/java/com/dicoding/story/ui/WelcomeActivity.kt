@@ -21,13 +21,14 @@ class WelcomeActivity : AppCompatActivity() {
         animation()
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        if (preference.getBoolean(Preference.STATE_KEY)){
-//            startActivity(Intent(this, MainActivity::class.java))
-//            finish()
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+        preference = Preference(this)
+        if (preference.getBoolean(Preference.STATE_KEY)){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
 
     private fun animation() {
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
