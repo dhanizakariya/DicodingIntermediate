@@ -7,15 +7,12 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import com.dicoding.story.api.ApiClient
-import com.dicoding.story.createTempFile
 import com.dicoding.story.data.DefaultResponse
 import com.dicoding.story.databinding.ActivityAddStoryBinding
 import com.dicoding.story.preference.Preference
@@ -51,8 +48,7 @@ class AddStoryActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        binding.btnCameraX.setOnClickListener { startCameraX() }
-        binding.btnCamera.setOnClickListener { startTakePhoto() }
+        binding.btnCamera.setOnClickListener { startCameraX() }
         binding.btnGallery.setOnClickListener { startGallery() }
         binding.btnUpload.setOnClickListener { uploadImage() }
     }
@@ -63,22 +59,6 @@ class AddStoryActivity : AppCompatActivity() {
         intent.type = "image/*"
         val chooser = Intent.createChooser(intent, "Choose a Picture")
         launcherIntentGallery.launch(chooser)
-    }
-
-    private fun startTakePhoto() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        intent.resolveActivity(packageManager)
-
-        createTempFile(application).also {
-            val photoURI: Uri = FileProvider.getUriForFile(
-                this@AddStoryActivity,
-                "com.dicoding.story",
-                it
-            )
-            currentPhotoPath = it.absolutePath
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-            launcherIntentCamera.launch(intent)
-        }
     }
 
     private fun startCameraX() {
@@ -103,19 +83,6 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
-    private val launcherIntentCamera = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == RESULT_OK) {
-            val myFile = File(currentPhotoPath)
-            getFile = myFile
-
-            val result = BitmapFactory.decodeFile(myFile.path)
-
-            binding.imgPreview.setImageBitmap(result)
-        }
-    }
-
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -133,7 +100,6 @@ class AddStoryActivity : AppCompatActivity() {
 
             val description =
                 binding.descEditText.text.toString().toRequestBody()
-            //"Ini adalah deksripsi gambar".toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
                 "photo",

@@ -7,11 +7,11 @@
     tools:context=".ui.SignUpActivity">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="24dp"
         android:src="@drawable/img"
@@ -31,11 +31,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:alpha="100"
+        android:alpha="0"
+        android:hint="@string/hint_email"
         app:counterEnabled="true"
         app:counterMaxLength="35"
         app:endIconMode="clear_text"
-        android:hint="@string/hint_email"
         app:helperText="*Wajib Diisi"
         app:helperTextTextColor="@color/red_700"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:alpha="100"
+        android:alpha="0"
         android:hint="@string/hint_username"
         app:counterEnabled="true"
         app:counterMaxLength="25"
@@ -92,11 +92,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:alpha="100"
+        android:alpha="0"
+        android:hint="@string/hint_pass"
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:helperText="*Wajib Diisi"
-        android:hint="@string/hint_pass"
         app:helperTextTextColor="@color/red_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -121,6 +121,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
+        android:alpha="0"
         android:background="@drawable/rect2"
         android:text="@string/sing_up"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,6 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:alpha="0"
         app:layout_constraintStart_toStartOf="@+id/passwordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout">
 
@@ -181,6 +183,6 @@
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

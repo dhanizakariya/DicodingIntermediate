@@ -1,11 +1,14 @@
 package com.dicoding.story.ui
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,10 +30,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        animation()
         initAction()
         startViewModel()
         recycleViewConfig()
+    }
 
+    private fun animation() {
+        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -40,19 +51,16 @@ class MainActivity : AppCompatActivity() {
         adapter = StoryAdapter(list)
         adapter.notifyDataSetChanged()
 
-        val actionbar = supportActionBar
-        actionbar!!.hide()
-
-        adapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: ListStoryItem) {
-                Intent(this@MainActivity, StoryDetailActivity::class.java).also {
-                    it.putExtra(StoryDetailActivity.EXTRA_NAME, data.name)
-                    it.putExtra(StoryDetailActivity.EXTRA_DESCRIPTION, data.description)
-                    it.putExtra(StoryDetailActivity.EXTRA_PHOTO, data.photoUrl)
-                    startActivity(it)
-                }
-            }
-        })
+//        adapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
+//            override fun onItemClicked(data: ListStoryItem) {
+//                Intent(this@MainActivity, StoryDetailActivity::class.java).also {
+//                    it.putExtra(StoryDetailActivity.EXTRA_NAME, data.name)
+//                    it.putExtra(StoryDetailActivity.EXTRA_DESCRIPTION, data.description)
+//                    it.putExtra(StoryDetailActivity.EXTRA_PHOTO, data.photoUrl)
+//                    startActivity(it, )
+//                }
+//            }
+//        })
     }
 
     private fun startViewModel() {
